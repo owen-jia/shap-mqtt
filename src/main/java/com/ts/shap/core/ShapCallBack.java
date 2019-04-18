@@ -19,7 +19,6 @@ public class ShapCallBack implements MqttCallback {
         this.mqttClient = ShapContext.getInstance().getMqttClient();
     }
 
-    @Override
     public void connectionLost(Throwable cause) {
         log.warn("mqtt连接断开,{}",cause.getMessage());
         MqttConnectOptions options = ShapContext.getInstance().getOptions();
@@ -40,12 +39,10 @@ public class ShapCallBack implements MqttCallback {
         }
     }
 
-    @Override
     public void messageArrived(String topic, MqttMessage message) throws Exception {
         log.debug("消息到达,topic:{},id:{},qos:{}",topic,message.getId(),message.getQos());
     }
 
-    @Override
     public void deliveryComplete(IMqttDeliveryToken token) {
         log.debug("消息发送完成,id:{}",token.getMessageId());
 
