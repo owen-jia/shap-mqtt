@@ -28,4 +28,8 @@ public abstract class CoreThread extends Thread{
 
         log.info("<"+this.getClass().getName() + ">被动关闭");
     }
+
+    public static String getFlag() {
+        return flag;
+    }
 }

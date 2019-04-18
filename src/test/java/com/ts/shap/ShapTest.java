@@ -30,7 +30,7 @@ public class ShapTest {
     }
 
     public static void main(String[] args){
-        new ShapTest().subTest();
+        new ShapTest().pubTest();
     }
 
 }
