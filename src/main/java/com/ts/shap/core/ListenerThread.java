@@ -28,7 +28,7 @@ public class ListenerThread extends CoreThread{
         try {
             System.out.println("this is run!");
             while (!this.stoped){
-                System.out.println("now is " + LocalDateTime.now().toString());
+                System.out.println("("+topic + ")now is " + LocalDateTime.now().toString());
 
                 context.getMqttClient().subscribe(topic, qos, listener);
 

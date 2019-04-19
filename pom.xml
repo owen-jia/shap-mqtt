@@ -30,6 +30,26 @@
   </dependencies>
 
   <build>
-
+    <finalName>${project.artifactId}</finalName>
+    <plugins>
+      <plugin>
+        <artifactId>maven-compiler-plugin</artifactId>
+      </plugin>
+      <plugin>
+        <artifactId>maven-source-plugin</artifactId>
+      </plugin>
+    </plugins>
   </build>
+
+  <developers>
+    <developer>
+      <id>001</id>
+      <name>Owen Jia</name>
+      <email>owen-jia@outlook.com</email>
+      <url>https://www.github.com/owen-jia</url>
+      <roles>
+        <role>owner</role>
+      </roles>
+    </developer>
+  </developers>
 </project>

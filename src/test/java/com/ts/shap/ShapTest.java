@@ -9,16 +9,14 @@ import org.eclipse.paho.client.mqttv3.MqttMessage;
  */
 public class ShapTest {
 
-    ShapMqtt shapMqtt = new ShapMqtt();
+    ShapMqtt shapMqtt = new ShapMqtt("tcp://172.20.10.187:1883");
 
     public void subTest() {
-        shapMqtt.subscribe("hello/1",new NcSubscribe());
-
-        shapMqtt.subscribe("hello/2",new NcSubscribe());
-
-        shapMqtt.subscribe("hello/3",new NcSubscribe());
-
         shapMqtt.subscribe("hello/#",new NcSubscribe());
+
+        for(int i=1;i <= 50; i++){
+            shapMqtt.subscribe("hello/"+i,new NcSubscribe());
+        }
     }
 
     public void pubTest() {
@@ -30,7 +28,7 @@ public class ShapTest {
     }
 
     public static void main(String[] args){
-        new ShapTest().pubTest();
+        new ShapTest().subTest();
     }
 
 }
