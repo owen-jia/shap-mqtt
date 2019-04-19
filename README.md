@@ -1,5 +1,5 @@
 # shap-mqtt
-ShapMqtt是针对Java体系研发的一款mqtt client，简单、小巧、稳定、低耗的开源工具。
+Shap是针对Java体系研发的一款mqtt连接client，简单、小巧、稳定、低耗的开源工具。
 
 > @author: owen jia
 
