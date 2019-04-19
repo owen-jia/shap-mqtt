@@ -1,6 +1,5 @@
 package com.ts.shap;
 
-import com.ts.shap.IShapListener;
 import org.eclipse.paho.client.mqttv3.MqttMessage;
 
 /**

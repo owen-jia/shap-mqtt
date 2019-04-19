@@ -13,28 +13,27 @@ public class ShapCallBack implements MqttCallback {
 
     private final static Logger log = LoggerFactory.getLogger(ShapCallBack.class);
 
-    MqttClient mqttClient;
-
-    public ShapCallBack() {
-        this.mqttClient = ShapContext.getInstance().getMqttClient();
-    }
-
     public void connectionLost(Throwable cause) {
-        log.warn("mqtt连接断开,{}",cause.getMessage());
+        log.error("mqtt连接断开,{}",cause.getMessage());
+
         MqttConnectOptions options = ShapContext.getInstance().getOptions();
+        MqttClient mqttClient = ShapContext.getInstance().getMqttClient();
         try {
             mqttClient.connectWithResult(options);
-            log.warn("已经重新连接mqtt");
+            log.info("mqtt重新连接成功");
         } catch (MqttException e) {
-            log.warn("mqtt重新连接失败,{}",e.getMessage());
+            log.error("mqtt重新连接失败,{}",e.getMessage());
+
             try {
                 mqttClient.close(true);
                 mqttClient = null;
-                mqttClient = new MqttClient(mqttClient.getServerURI(),mqttClient.getClientId());
+                mqttClient = new MqttClient(mqttClient.getServerURI(), mqttClient.getClientId());
                 IMqttToken token = mqttClient.connectWithResult(options);
-                log.warn("再次尝试重新连接mqtt,{}",token.isComplete());
+                log.info("mqtt再次重新连接成功,{}",token.isComplete());
             } catch (MqttException e1) {
-                log.warn("再次尝试重新连接mqtt失败,{}",e1.getMessage());
+                log.error("mqtt再次重新连接失败,{}",e1.getMessage());
+                ShapContext.getInstance().stopListener();
+                throw new RuntimeException("Mqtt连接断开，尝试2次重连失败，请检测环境");
             }
         }
     }
@@ -45,12 +44,5 @@ public class ShapCallBack implements MqttCallback {
 
     public void deliveryComplete(IMqttDeliveryToken token) {
         log.debug("消息发送完成,id:{}",token.getMessageId());
-
-//        try {
-//            String msg = new String(token.getMessage().getPayload());
-//            log.debug(msg);
-//        } catch (MqttException e) {
-//            e.printStackTrace();
-//        }
     }
 }

@@ -2,20 +2,23 @@ package com.ts.shap.core;
 
 import com.ts.shap.IShapListener;
 import org.eclipse.paho.client.mqttv3.MqttException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.time.LocalDateTime;
 
 /**
+ * 基础程序
  * @author: Owen Jia
  * @time: 2019/4/18 15:21
  */
 public class ListenerThread extends CoreThread{
-
+    private final static Logger log = LoggerFactory.getLogger(ListenerThread.class);
     ShapContext context = ShapContext.getInstance();
 
-    IShapListener listener;
-    String topic;
-    int qos;
+    private IShapListener listener;
+    private String topic;
+    private int qos;
 
     public ListenerThread(String topic, int qos, IShapListener listener) {
         this.topic = topic;
@@ -26,12 +29,9 @@ public class ListenerThread extends CoreThread{
     @Override
     public void run() {
         try {
-            System.out.println("this is run!");
+            log.debug("("+topic + ") is listening from " + LocalDateTime.now().toString());
             while (!this.stoped){
-                System.out.println("("+topic + ")now is " + LocalDateTime.now().toString());
-
                 context.getMqttClient().subscribe(topic, qos, listener);
-
                 sleep(context.getScanTime() * 1000);
             }
         } catch (InterruptedException e) {
@@ -39,6 +39,10 @@ public class ListenerThread extends CoreThread{
         } catch (MqttException e) {
             e.printStackTrace();
         }
+    }
+
+    public IShapListener getListener() {
+        return listener;
     }
 
 }

@@ -15,7 +15,7 @@ public class ShapMqtt {
 
     private String serverUrl = "tcp://127.0.0.1:1883";
     private String clientId = "shap-client";
-    private int scanTime;//单位秒，最小3s
+    private int scanTime;//单位秒
 
     public ShapMqtt(String serverUrl, String clientId, int scanTime) {
         this.serverUrl = serverUrl;
@@ -39,12 +39,20 @@ public class ShapMqtt {
         }
     }
 
+    public void publish(String topic, int qos, byte[] content, boolean retained){
+        try {
+            shapContext.getMqttClient().publish(topic,content,qos,retained);
+        } catch (MqttException e) {
+            e.printStackTrace();
+        }
+    }
+
     /**
      * 发布
      */
     public void publish(String topic, MqttMessage mqttMessage){
         try {
-            shapContext.getMqttClient().publish(topic,mqttMessage);
+            shapContext.getMqttClient().publish(topic, mqttMessage);
         } catch (MqttException e) {
             e.printStackTrace();
         }

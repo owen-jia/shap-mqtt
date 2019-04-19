@@ -6,5 +6,4 @@ package com.ts.shap;
  */
 public class ShapException extends Exception {
 
-
 }

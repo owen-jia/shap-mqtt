@@ -11,6 +11,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -30,7 +31,7 @@ public class ShapContext {
     private MqttClient mqttClient;
     private MqttConnectOptions options;
 
-    private int scanTime = 3;// 监听时间，单位秒，默认5s
+    private int scanTime = 2;// 监听时间，单位秒
 
     private ShapContext(){
     }
@@ -39,7 +40,6 @@ public class ShapContext {
         if(context == null){
             context = new ShapContext();
         }
-
         return context;
     }
 
@@ -57,6 +57,22 @@ public class ShapContext {
         IMqttToken mqttToken = mqttClient.connectWithResult(options);
 
         log.debug("MqttClient connect is {}", mqttToken.isComplete() ? "success" : "error");
+    }
+
+    /**
+     * 停止所有的listener
+     */
+    protected void stopListener(){
+        List<?> stopedListener =  pool.shutdownNow();
+
+        stopedListener.forEach( a -> {
+            if(a instanceof ListenerThread) {
+                ListenerThread thread = (ListenerThread) a;
+                IShapListener listener = thread.getListener();
+                log.warn(listener.getClass().getName() + " was stoped.");
+            }
+            log.debug("what's the " + a.getClass().getName());
+        });
     }
 
     public void registListener(String topic, IShapListener listener){
