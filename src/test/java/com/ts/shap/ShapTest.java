@@ -9,7 +9,7 @@ import org.eclipse.paho.client.mqttv3.MqttMessage;
  */
 public class ShapTest {
 
-    ShapMqtt shapMqtt = new ShapMqtt("tcp://172.20.10.187:1883");
+    ShapMqtt shapMqtt = new ShapMqtt("tcp://127.0.0.1:1883");
 
     public void subTest() {
         shapMqtt.subscribe("hello/#",new NcSubscribe());

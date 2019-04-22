@@ -36,7 +36,7 @@ public class ShapContext {
     private ShapContext(){
     }
 
-    public static ShapContext getInstance(){
+    public synchronized static ShapContext getInstance(){
         if(context == null){
             context = new ShapContext();
         }
@@ -63,13 +63,13 @@ public class ShapContext {
      * 停止所有的listener
      */
     protected void stopListener(){
-        List<?> stopedListener =  pool.shutdownNow();
+        List<?> stopedListener = pool.shutdownNow();
 
         stopedListener.forEach( a -> {
             if(a instanceof ListenerThread) {
                 ListenerThread thread = (ListenerThread) a;
                 IShapListener listener = thread.getListener();
-                log.warn(listener.getClass().getName() + " was stoped.");
+                log.warn(listener.getClass().getName() + " is waitting to stop.");
             }
             log.debug("what's the " + a.getClass().getName());
         });
