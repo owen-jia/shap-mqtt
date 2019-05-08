@@ -39,6 +39,23 @@ public class ShapMqtt {
         }
     }
 
+    /**
+     * 发布，默认qos=0，retained=false
+     * @param topic
+     * @param content
+     */
+    public void publish(String topic, String content){
+        this.publish(topic,0,content.getBytes(),false);
+    }
+
+    public void publish(String topic, int qos, String content){
+        this.publish(topic,qos,content.getBytes(),false);
+    }
+
+    public void publish(String topic, int qos, String content, boolean retained){
+        this.publish(topic,qos,content.getBytes(),retained);
+    }
+
     public void publish(String topic, int qos, byte[] content, boolean retained){
         try {
             shapContext.getMqttClient().publish(topic,content,qos,retained);
@@ -69,7 +86,9 @@ public class ShapMqtt {
     }
 
     /**
-     * 订阅
+     * 订阅，默认qos=0
+     * @param topic
+     * @param listener
      */
     public void subscribe(String topic, IShapListener listener){
         if(listener.getClass().isInterface()){
