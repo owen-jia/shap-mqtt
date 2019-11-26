@@ -12,7 +12,8 @@ import org.eclipse.paho.client.mqttv3.MqttMessage;
 public class ShapMqtt {
 
     private ShapContext shapContext = ShapContext.getInstance();
-
+    private String username;
+    private String password;
     private String serverUrl = "tcp://127.0.0.1:1883";
     private String clientId = "shap-client";
     private int scanTime;//单位秒
@@ -119,5 +120,21 @@ public class ShapMqtt {
 
     public void setScanTime(int scanTime) {
         this.scanTime = scanTime;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 }

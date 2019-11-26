@@ -49,6 +49,11 @@ public class ShapContext {
         options.setConnectionTimeout(10);
         options.setCleanSession(false);
 
+        if(shapMqtt.getUsername() != null)
+            options.setUserName(shapMqtt.getUsername());
+        if(shapMqtt.getPassword() != null)
+            options.setPassword(shapMqtt.getPassword().toCharArray());
+
         if(shapMqtt.getScanTime() > this.getScanTime())
             this.setScanTime(shapMqtt.getScanTime());
 
