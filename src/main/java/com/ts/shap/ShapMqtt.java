@@ -26,6 +26,12 @@ public class ShapMqtt {
         this.initContent();
     }
 
+    public ShapMqtt(String serverUrl, String clientId){
+        this.serverUrl = serverUrl;
+        this.clientId = clientId;
+        this.initContent();
+    }
+
     public ShapMqtt(String serverUrl) {
         this.serverUrl = serverUrl;
 
