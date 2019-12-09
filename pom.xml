@@ -69,6 +69,9 @@
   <profiles>
     <profile>
       <id>maven-release</id>
+      <activation>
+        <activeByDefault>false</activeByDefault>
+      </activation>
       <build>
         <plugins>
           <plugin>
@@ -95,6 +98,7 @@
           </plugin>
           <plugin>
             <artifactId>maven-source-plugin</artifactId>
+            <version>3.1.0</version>
             <executions>
               <execution>
                 <id>attach-sources</id>
@@ -106,6 +110,12 @@
           </plugin>
           <plugin>
             <artifactId>maven-javadoc-plugin</artifactId>
+            <version>3.1.1</version>
+            <configuration>
+              <encoding>UTF-8</encoding>
+              <charset>UTF-8</charset>
+              <docencoding>UTF-8</docencoding>
+            </configuration>
             <executions>
               <execution>
                 <id>attach-javadocs</id>
@@ -118,6 +128,7 @@
           <!--自动签名-->
           <plugin>
             <artifactId>maven-gpg-plugin</artifactId>
+            <version>1.6</version>
             <executions>
               <execution>
                 <id>sign-artifacts</id>

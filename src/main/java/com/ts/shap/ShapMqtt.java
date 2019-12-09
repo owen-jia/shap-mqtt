@@ -6,8 +6,8 @@ import org.eclipse.paho.client.mqttv3.MqttMessage;
 
 /**
  * ShapMqtt Util
- * @author: Owen Jia<owen-jia@outlook.com>
- * @time: 2019/4/18 13:19
+ * @author : Owen Jia
+ * @since : 2019/4/18 13:19
  */
 public class ShapMqtt {
 
@@ -48,8 +48,8 @@ public class ShapMqtt {
 
     /**
      * 发布，默认qos=0，retained=false
-     * @param topic
-     * @param content
+     * @param topic Topic
+     * @param content 发送内容
      */
     public void publish(String topic, String content){
         this.publish(topic,0,content.getBytes(),false);
@@ -63,6 +63,13 @@ public class ShapMqtt {
         this.publish(topic,qos,content.getBytes(),retained);
     }
 
+    /**
+     * 发送消息
+     * @param topic Topic
+     * @param qos 消息级别
+     * @param content 内容
+     * @param retained 是否保留broker中, true|false
+     */
     public void publish(String topic, int qos, byte[] content, boolean retained){
         try {
             shapContext.getMqttClient().publish(topic,content,qos,retained);
@@ -73,6 +80,8 @@ public class ShapMqtt {
 
     /**
      * 发布
+     * @param topic Topic
+     * @param mqttMessage 消息内容
      */
     public void publish(String topic, MqttMessage mqttMessage){
         try {
@@ -84,6 +93,9 @@ public class ShapMqtt {
 
     /**
      * 订阅
+     * @param topic Topic
+     * @param qos Qos
+     * @param listener 自定义监听器 extend IShapListener
      */
     public void subscribe(String topic,int qos, IShapListener listener){
         if(listener.getClass().isInterface()){
@@ -94,8 +106,8 @@ public class ShapMqtt {
 
     /**
      * 订阅，默认qos=0
-     * @param topic
-     * @param listener
+     * @param topic Topic
+     * @param listener 自定义监听
      */
     public void subscribe(String topic, IShapListener listener){
         if(listener.getClass().isInterface()){

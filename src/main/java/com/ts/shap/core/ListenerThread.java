@@ -9,8 +9,8 @@ import java.time.LocalDateTime;
 
 /**
  * 基础程序
- * @author: Owen Jia
- * @time: 2019/4/18 15:21
+ * @author : Owen Jia
+ * @since : 2019/4/18 15:21
  */
 public class ListenerThread extends CoreThread{
     private final static Logger log = LoggerFactory.getLogger(ListenerThread.class);

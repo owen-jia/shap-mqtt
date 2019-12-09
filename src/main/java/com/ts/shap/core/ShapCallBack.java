@@ -6,8 +6,8 @@ import org.slf4j.LoggerFactory;
 
 /**
  * MqttClient 连接回调监控类
- * @author: Owen Jia
- * @time: 2018/12/27 10:15
+ * @author : Owen Jia
+ * @since : 2018/12/27 10:15
  */
 public class ShapCallBack implements MqttCallback {
 

@@ -18,8 +18,8 @@ import java.util.concurrent.Executors;
 
 /**
  * Shap 生命周期上下文
- * @author: Owen Jia
- * @time: 2019/4/16 17:34
+ * @author : Owen Jia
+ * @since : 2019/4/16 17:34
  */
 public class ShapContext {
     private final static Logger log = LoggerFactory.getLogger(ShapContext.class);

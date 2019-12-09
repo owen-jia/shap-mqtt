@@ -4,8 +4,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * @author: Owen Jia
- * @time: 2019/4/18 15:17
+ * @author : Owen Jia
+ * @since : 2019/4/18 15:17
  */
 public abstract class CoreThread extends Thread{
 
