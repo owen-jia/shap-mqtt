@@ -3,6 +3,17 @@ Shap是针对Java体系研发的一款mqtt连接client，简单、小巧、稳�
 
 > @author: owen jia
 
+## 最新版本
+
+```xml
+<!-- https://repo.maven.apache.org/maven2/com/github/owen-jia/shap-mqtt/ -->
+<dependency>
+    <groupId>com.github.owen-jia</groupId>
+    <artifactId>shap-mqtt</artifactId>
+    <version>0.0.2</version>
+</dependency>
+```
+
 ## Sample
 
 > 在测试模块包中有ShapTest类有详细的测试用例。
