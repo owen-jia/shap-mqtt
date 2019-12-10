@@ -44,4 +44,4 @@ class Test {
 
 ## 新需求和错误提交
 
-非常欢迎大家提出新需求，也欢迎指出bug，请在github的Issues中提交。
+非常欢迎提出新需求和BUG，请在github的Issues中提交。
