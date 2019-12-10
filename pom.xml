@@ -3,7 +3,7 @@
 
   <groupId>com.github.owen-jia</groupId>
   <artifactId>shap-mqtt</artifactId>
-  <version>0.0.2-SNAPSHOT</version>
+  <version>0.0.2</version>
   <packaging>jar</packaging>
 
   <name>${project.groupId}:${project.artifactId}</name>
@@ -35,17 +35,6 @@
     <url>scm:git:https://github.com/owen-jia/shap-mqtt</url>
     <tag>HEAD</tag>
   </scm>
-
-  <distributionManagement>
-    <snapshotRepository>
-      <id>ossrh</id>
-      <url>https://oss.sonatype.org/content/repositories/snapshots</url>
-    </snapshotRepository>
-    <repository>
-      <id>ossrh</id>
-      <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
-    </repository>
-  </distributionManagement>
 
   <build>
     <finalName>${project.artifactId}</finalName>
@@ -102,6 +91,7 @@
             <executions>
               <execution>
                 <id>attach-sources</id>
+                <phase>package</phase>
                 <goals>
                   <goal>jar-no-fork</goal>
                 </goals>
@@ -119,16 +109,16 @@
             <executions>
               <execution>
                 <id>attach-javadocs</id>
+                <phase>package</phase>
                 <goals>
                   <goal>jar</goal>
                 </goals>
               </execution>
             </executions>
           </plugin>
-          <!--自动签名-->
           <plugin>
             <artifactId>maven-gpg-plugin</artifactId>
-            <version>1.6</version>
+            <version>1.0</version>
             <executions>
               <execution>
                 <id>sign-artifacts</id>
@@ -141,6 +131,16 @@
           </plugin>
         </plugins>
       </build>
+      <distributionManagement>
+        <snapshotRepository>
+          <id>ossrh</id>
+          <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+        </snapshotRepository>
+        <repository>
+          <id>ossrh</id>
+          <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+        </repository>
+      </distributionManagement>
     </profile>
   </profiles>
 
