@@ -14,35 +14,35 @@ public class ShapCallBack implements MqttCallback {
     private final static Logger log = LoggerFactory.getLogger(ShapCallBack.class);
 
     public void connectionLost(Throwable cause) {
-        log.error("mqtt连接断开,{}",cause.getMessage());
+        log.error("mqtt connection lost at {}",cause.getMessage());
 
         MqttConnectOptions options = ShapContext.getInstance().getOptions();
         MqttClient mqttClient = ShapContext.getInstance().getMqttClient();
         try {
             mqttClient.connectWithResult(options);
-            log.info("mqtt重新连接成功");
+            log.info("mqtt reconnect success.");
         } catch (MqttException e) {
-            log.error("mqtt重新连接失败,{}",e.getMessage());
+            log.error("mqtt reconnect failure.{},{}",e.getMessage(),e.getCause().getMessage());
 
             try {
                 mqttClient.close(true);
                 mqttClient = null;
                 mqttClient = new MqttClient(mqttClient.getServerURI(), mqttClient.getClientId());
                 IMqttToken token = mqttClient.connectWithResult(options);
-                log.info("mqtt再次重新连接成功,{}",token.isComplete());
+                log.info("mqtt reconnect again success,{}",token.isComplete());
             } catch (MqttException e1) {
-                log.error("mqtt再次重新连接失败,{}",e1.getMessage());
+                log.error("mqtt reconnect again failure,{}",e1.getMessage());
                 ShapContext.getInstance().stopListener();
-                throw new RuntimeException("Mqtt连接断开，尝试2次重连失败，请检测环境");
+                throw new RuntimeException("mqtt connection is lost in 2 try times,please check your config data.");
             }
         }
     }
 
     public void messageArrived(String topic, MqttMessage message) throws Exception {
-        log.debug("消息到达,topic:{},id:{},qos:{}",topic,message.getId(),message.getQos());
+        log.debug("message arrived,topic:{},id:{},qos:{}",topic,message.getId(),message.getQos());
     }
 
     public void deliveryComplete(IMqttDeliveryToken token) {
-        log.debug("消息发送完成,id:{}",token.getMessageId());
+        log.debug("message send complete,id:{}",token.getMessageId());
     }
 }
