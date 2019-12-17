@@ -13,8 +13,7 @@ import org.slf4j.LoggerFactory;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
+import java.util.concurrent.*;
 
 /**
  * Shap 生命周期上下文
@@ -26,7 +25,9 @@ public class ShapContext {
 
     static ShapContext context = null;
     static Map<Class, IShapListener> shapListenerMap = new HashMap<>();
-    static ExecutorService pool = Executors.newCachedThreadPool();
+    static ExecutorService pool = new ThreadPoolExecutor(5, Integer.MAX_VALUE,
+            60L, TimeUnit.SECONDS, new SynchronousQueue<Runnable>(),
+            Executors.defaultThreadFactory(),new ThreadPoolExecutor.CallerRunsPolicy());
 
     private MqttClient mqttClient;
     private MqttConnectOptions options;
@@ -87,7 +88,7 @@ public class ShapContext {
     public void registListener(String topic,int qos, IShapListener listener){
         shapListenerMap.put(listener.getClass(), listener);
         ListenerThread thread = new ListenerThread(topic, qos, listener);
-        pool.execute(thread);
+        pool.submit(thread);
     }
 
     public MqttClient getMqttClient() {
