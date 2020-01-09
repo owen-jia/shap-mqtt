@@ -14,7 +14,7 @@ public class ShapCallBack implements MqttCallback {
     private final static Logger log = LoggerFactory.getLogger(ShapCallBack.class);
 
     public void connectionLost(Throwable cause) {
-        log.error("mqtt connection lost at {}",cause.getMessage());
+        log.warn("mqtt connection lost at {}",cause.getMessage());
 
         MqttConnectOptions options = ShapContext.getInstance().getOptions();
         MqttClient mqttClient = ShapContext.getInstance().getMqttClient();
@@ -22,7 +22,7 @@ public class ShapCallBack implements MqttCallback {
             mqttClient.connectWithResult(options);
             log.info("mqtt reconnect success.");
         } catch (MqttException e) {
-            log.error("mqtt reconnect failure.{},{}",e.getMessage(),e.getCause().getMessage());
+            log.warn("mqtt reconnect failure.{},{}",e.getMessage(),e.getCause().getMessage());
 
             try {
                 mqttClient.close(true);
