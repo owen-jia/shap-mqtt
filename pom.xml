@@ -3,7 +3,7 @@
 
   <groupId>com.github.owen-jia</groupId>
   <artifactId>shap-mqtt</artifactId>
-  <version>0.0.4-SNAPSHOT</version>
+  <version>0.0.3</version>
   <packaging>jar</packaging>
 
   <name>${project.groupId}:${project.artifactId}</name>
