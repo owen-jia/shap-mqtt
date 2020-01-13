@@ -1,8 +1,6 @@
 # shap-mqtt
 Shap是针对Java体系研发的一款mqtt连接client，简单、小巧、稳定、低耗的开源工具。
 
-> @author: owen jia
-
 ## 最新版本
 
 ```xml
@@ -10,7 +8,7 @@ Shap是针对Java体系研发的一款mqtt连接client，简单、小巧、稳�
 <dependency>
     <groupId>com.github.owen-jia</groupId>
     <artifactId>shap-mqtt</artifactId>
-    <version>0.0.2</version>
+    <version>0.0.3</version>
 </dependency>
 ```
 
