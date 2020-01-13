@@ -8,7 +8,7 @@ Shap是针对Java体系研发的一款mqtt连接client，简单、小巧、稳�
 <dependency>
     <groupId>com.github.owen-jia</groupId>
     <artifactId>shap-mqtt</artifactId>
-    <version>0.0.3</version>
+    <version>0.0.4</version>
 </dependency>
 ```
 
@@ -39,6 +39,10 @@ class Test {
     }
 }
 ```
+
+## 开发计划
+
+1. 支持SpringBoot方式启动，研究发送和接受机制；
 
 ## 新需求和错误提交
 
